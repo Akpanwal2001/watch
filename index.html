@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Watch</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        color: #fff;
+      }
+      body {
+        background-color: #000;
+      }
+      .container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      .circle {
+        width: 250px;
+        height: 250px;
+        border: 1px solid #fff;
+        border-radius: 50%;
+        position: absolute;
+        background-color: #000;
+        box-shadow: rgba(247, 245, 245, 0.56) 0px 22px 70px 4px;
+        z-index: -99;
+      }
+      .center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid #fff;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #000;
+      }
+      .numbers {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        box-sizing: content-box;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        box-shadow: rgba(250, 248, 248, 0.17) 0px -23px 25px 0px inset,
+          rgba(245, 244, 244, 0.15) 0px -36px 30px 0px inset,
+          rgba(255, 255, 255, 0.1) 0px -79px 40px 0px inset,
+          rgba(255, 255, 255, 0.06) 0px 2px 1px,
+          rgba(255, 255, 255, 0.09) 0px 4px 2px,
+          rgba(255, 255, 255, 0.09) 0px 8px 4px,
+          rgba(255, 255, 255, 0.09) 0px 16px 8px,
+          rgba(221, 213, 213, 0.09) 0px 32px 16px;
+      }
+      .numbers .number {
+        height: 50%;
+        position: absolute;
+        font-size: 2rem;
+        color: red;
+        z-index: 99;
+        /* border: 1px solid #fff; */
+      }
+      .numbers .number span {
+        right: -7px;
+        position: absolute;
+      }
+      /* number 1 */
+      .numbers .number1 {
+        transform: rotate(30deg);
+        transform-origin: 50% 100%;
+      }
+      .numbers .number1 span {
+        transform: rotate(-30deg);
+      }
+      /* number 2 */
+      .numbers .number2 {
+        transform: rotate(60deg);
+        transform-origin: 50% 100%;
+      }
+      .numbers .number2 span {
+        transform: rotate(-60deg);
+      }
+      /* number 3 */
+      .numbers .number3 {
+        transform: rotate(90deg);
+        transform-origin: 50% 100%;
+      }
+      .numbers .number3 span {
+        transform: rotate(-90deg);
+      }
+      /* number 4 */
+      .numbers .number4 {
+        transform: rotate(120deg);
+        transform-origin: 50% calc(100%);
+      }
+
+      .numbers .number4 span {
+        transform: rotate(-120deg);
+      }
+
+      /* number 5 */
+      .numbers .number5 {
+        transform: rotate(150deg);
+        transform-origin: 50% 100%;
+      }
+
+      .numbers .number5 span {
+        transform: rotate(-150deg);
+      }
+
+      /* number 6 */
+      .numbers .number6 {
+        transform: rotate(180deg);
+        transform-origin: 50% 100%;
+      }
+
+      .numbers .number6 span {
+        transform: rotate(-180deg);
+      }
+
+      /* number  7 */
+      .numbers .number7 {
+        transform: rotate(210deg);
+        transform-origin: 50% 100%;
+      }
+
+      .numbers .number7 span {
+        transform: rotate(-210deg);
+      }
+
+      /* number 8 */
+      .numbers .number8 {
+        transform: rotate(240deg);
+        transform-origin: 50% 100%;
+      }
+      .numbers .number8 span {
+        transform: rotate(-240deg);
+      }
+
+      /* number 9 */
+      .numbers .number9 {
+        transform: rotate(270deg);
+        transform-origin: 50% 100%;
+      }
+      .numbers .number9 span {
+        transform: rotate(-270deg);
+      }
+
+      /* number 10 */
+      .numbers .number10 {
+        transform: rotate(300deg);
+        transform-origin: 50% 100%;
+      }
+      .numbers .number10 span {
+        transform: rotate(-300deg);
+      }
+
+      /* number 11 */
+      .numbers .number11 {
+        transform: rotate(330deg);
+        transform-origin: 50% 100%;
+      }
+      .numbers .number11 span {
+        transform: rotate(-330deg);
+      }
+      /* number 12 */
+      .numbers .number12 {
+        transform: rotate(360deg);
+        transform-origin: 50% 100%;
+      }
+      .numbers .number12 span {
+        transform: rotate(-360deg);
+      }
+
+      .indicators {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        box-sizing: content-box;
+        display: flex;
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+        z-index: -1;
+      }
+      .indicators > div {
+        border: none;
+        position: absolute;
+        transform-origin: 0% 100%;
+      }
+      .indicators > div > span {
+        width: 4px;
+        height: 10px;
+        position: absolute;
+        border-radius: 50%;
+        background-color: inherit;
+        top: 10px;
+        right: -1px;
+      }
+      /* hours  */
+      .indicators .hours {
+        height: 30%;
+        width: 2px;
+        transform: translate(0%, -50%);
+        background-color: #a7a7a7;
+      }
+      .indicators .minutes {
+        height: 35%;
+        width: 2px;
+        transform: translate(0%, -50%);
+        background-color: #0759af;
+      }
+      .indicators .seconds {
+        height: 40%;
+        width: 2px;
+        transform: translate(0%, -50%);
+        background-color: #d7ef15;
+      }
+      .digital_watch {
+        width: 100px;
+        height: 30px;
+        position: absolute;
+        top: 50px;
+        right: 50%;
+        transform: translate(50%, 0);
+        z-index: -50;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        box-shadow: rgba(250, 250, 250, 0.25) 0px 30px 60px -12px inset,
+          rgba(218, 214, 214, 0.3) 0px 18px 36px -18px inset;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="circle">
+        <div class="indicators">
+          <div class="hours" id="hours"><span></span></div>
+          <div class="minutes" id="minutes"><span></span></div>
+          <div class="seconds" id="seconds"><span></span></div>
+        </div>
+        <div class="center"></div>
+        <div class="numbers">
+          <div class="number number1"><span>1</span></div>
+          <div class="number number2"><span>2</span></div>
+          <div class="number number3"><span>3</span></div>
+          <div class="number number4"><span>4</span></div>
+          <div class="number number5"><span>5</span></div>
+          <div class="number number6"><span>6</span></div>
+          <div class="number number7"><span>7</span></div>
+          <div class="number number8"><span>8</span></div>
+          <div class="number number9"><span>9</span></div>
+          <div class="number number10"><span>10</span></div>
+          <div class="number number11"><span>11</span></div>
+          <div class="number number12"><span>12</span></div>
+        </div>
+        <div class="digital_watch" id="digital_watch">12:00:00</div>
+      </div>
+    </div>
+    <script>
+      let hours = document.getElementById("hours");
+      let minutes = document.getElementById("minutes");
+      let seconds = document.getElementById("seconds");
+      let digital_watch = document.getElementById("digital_watch");
+
+      const twoDigit = (digit) => {
+        if (digit < 10) {
+          return `0${digit}`;
+        } else {
+          return digit;
+        }
+      };
+
+      setInterval(() => {
+        const d = new Date();
+        let time = {
+          hours: d.getHours(),
+          minutes: d.getMinutes(),
+          seconds: d.getSeconds(),
+        };
+        var ampm = time.hours >= 12 ? "PM" : "AM";
+
+        seconds.style.transform = `translate(0%, -50%) rotate(${
+          time.seconds * 6
+        }deg)`;
+        minutes.style.transform = `translate(0%, -50%) rotate(${
+          time.minutes * 6
+        }deg)`;
+        hours.style.transform = `translate(0%, -50%) rotate(${
+          time.hours * 30
+        }deg)`;
+        digital_watch.innerHTML = `${twoDigit(time.hours)}:${twoDigit(
+          time.minutes
+        )}:${twoDigit(time.seconds)}`;
+      }, 1000);
+    </script>
+  </body>
+</html>
